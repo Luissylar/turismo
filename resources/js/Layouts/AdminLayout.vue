@@ -1,19 +1,27 @@
 <script setup>
 import { ref } from 'vue';
 import { Head, Link, router } from '@inertiajs/vue3';
-import AdminHeader from '@/Layouts/Partials/Admin/AdminHeader.vue';
-import AdminSidebar from '@/Layouts/Partials/Admin/AdminSidebar.vue';
+
+
+
+
+import DropdownLink from '@/Components/DropdownLink.vue';
+//import AdminHeader from '@/Layouts/Partials/Admin/AdminHeader.vue';
+//import AdminSidebar from '@/Layouts/Partials/Admin/AdminSidebar.vue';
 import AdminFooter from '@/Layouts/Partials/Admin/AdminFooter.vue';
 
 defineProps({
     title: String,
 });
+const logout = () => {
+    router.post(route('logout'));
+};
 </script>
 
 <template>
     <div>
         <Head :title="title" />
-        <AdminHeader />  <!-- Incluye el componente AdminHeader aquí -->
+        <!-- <AdminHeader />  Incluye el componente AdminHeader aquí -->
         <div class="main-content">
             <AdminSidebar />  <!-- Incluye el componente AdminSidebar aquí -->
             <main>
