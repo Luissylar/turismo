@@ -1,5 +1,8 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import NavLink from '@/Components/NavLink.vue';
+
+import { Link } from '@inertiajs/vue3';
 import {
     Dialog,
     DialogPanel,
@@ -42,6 +45,11 @@ const company = [
 ]
 
 const mobileMenuOpen = ref(false)
+
+
+
+
+
 </script>
 <template>
     <header class="bg-white">
@@ -62,8 +70,12 @@ const mobileMenuOpen = ref(false)
                 </button>
             </div>
             <PopoverGroup class="hidden lg:flex lg:gap-x-12">
-                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Tours</a>
-                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Destinos</a>
+                <NavLink :href="route('tours.index')" :active="route().current('tours.index')">
+                    Tours
+                </NavLink>
+                <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                    Destinos
+                </NavLink>
 
                 <Popover class="relative">
                     <PopoverButton class="flex items-center text-sm font-semibold leading-6 text-gray-900 gap-x-1">

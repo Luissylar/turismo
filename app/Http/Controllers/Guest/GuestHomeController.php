@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+
 class GuestHomeController extends Controller
 {
     public function index()
