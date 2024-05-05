@@ -42,9 +42,11 @@ const props = defineProps({
 
                         <!-- Parece que algo solucioné pero seguimos avanzando, agregar cada boton del sidebar modificando  <Link :href="route('admin.dashboard')"> </Link> -->
                         <li>
-                            <Link :href="route('admin.dashboard')"
-                                class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
-                            <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                            <Link :href="route('admin.dashboard')" :class="{
+                                'bg-gray-100 dark:bg-gray-700': route().current('admin.dashboard'),
+                                'hover:bg-gray-100 dark:hover:bg-gray-700': !route().current('admin.dashboard')
+                            }" class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-300 ease-in-out rounded-lg group dark:text-gray-200">
+                            <svg class="flex-shrink-0 w-6 h-6 text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z">
@@ -54,8 +56,12 @@ const props = defineProps({
                                 </path>
                             </svg>
                             <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
-                            <span
-                                class="inline-flex items-center justify-center w-5 h-5 p-1 ml-3 text-sm font-medium rounded-full text-primary-800 bg-primary-100">3</span>
+                            <span :class="{
+                                'animate-ping': route().current('admin.dashboard'),
+                                'opacity-75': !route().current('admin.dashboard')
+                            }" class="inline-flex items-center justify-center w-5 h-5 p-1 ml-3 text-sm font-medium rounded-full text-primary-800 bg-primary-100">
+                                3
+                            </span>
                             </Link>
                         </li>
 

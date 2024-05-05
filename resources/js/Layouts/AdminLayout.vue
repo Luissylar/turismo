@@ -4,7 +4,7 @@ import { Head, Link, router } from '@inertiajs/vue3';
 
 import AdminHeader from '@/Layouts/Partials/Admin/AdminHeader.vue';
 import AdminSidebar from '@/Layouts/Partials/Admin/AdminSidebar.vue';
-//import AdminFooter from '@/Layouts/Partials/Admin/AdminFooter.vue';
+import AdminFooter from '@/Layouts/Partials/Admin/AdminFooter.vue';
 
 defineProps({
     title: String,
@@ -34,8 +34,6 @@ const logout = () => {
 
                 <main>
                     <div class="px-4 pt-6">
-
-
                         <slot />
                     </div>
                 </main>
