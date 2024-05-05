@@ -1,8 +1,12 @@
 <script setup>
-import { ref, computed } from 'vue'
-import NavLink from '@/Components/NavLink.vue';
+// Importaciones de Vue y utilidades de Inertia
+import { ref, computed } from 'vue';
 
+import { usePage } from '@inertiajs/vue3';
 import { Link } from '@inertiajs/vue3';
+
+// Importación de componentes y iconos
+import NavLink from '@/Components/NavLink.vue';
 import {
     Dialog,
     DialogPanel,
@@ -13,7 +17,13 @@ import {
     PopoverButton,
     PopoverGroup,
     PopoverPanel,
-} from '@headlessui/vue'
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItems,
+    TransitionChild,
+    TransitionRoot,
+} from '@headlessui/vue';
 import {
     ArrowPathIcon,
     Bars3Icon,
@@ -22,35 +32,46 @@ import {
     FingerPrintIcon,
     SquaresPlusIcon,
     XMarkIcon,
-} from '@heroicons/vue/24/outline'
-import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid'
+} from '@heroicons/vue/24/outline';
+import { ChevronDownIcon, PhoneIcon, PlayCircleIcon } from '@heroicons/vue/20/solid';
 
+
+// Extracción de datos de usuario autenticado
+const { auth } = usePage().props;
+const user = auth.user;
+
+// Datos para elementos interactivos y enlaces
 const products = [
     { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
     { name: 'Engagement', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
     { name: 'Security', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
     { name: 'Integrations', description: 'Connect with third-party tools', href: '#', icon: SquaresPlusIcon },
     { name: 'Automations', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
-]
+];
 const callsToAction = [
     { name: 'Watch demo', href: '#', icon: PlayCircleIcon },
     { name: 'Contact sales', href: '#', icon: PhoneIcon },
-]
+];
 const company = [
     { name: 'About us', href: '#' },
     { name: 'Careers', href: '#' },
     { name: 'Support', href: '#' },
     { name: 'Press', href: '#' },
     { name: 'Blog', href: '#' },
-]
+];
 
-const mobileMenuOpen = ref(false)
+// Estado para controlar la visibilidad del menú móvil
+const mobileMenuOpen = ref(false);
 
-
-
+const userNavigation = [
+    { name: 'Your profile', href: '#' },
+    { name: 'Sign out', href: '#' },
+];
+// Función para manejar el cierre de sesión
 
 
 </script>
+
 <template>
     <header class="bg-white">
         <nav class="flex items-center justify-between p-6 mx-auto max-w-7xl lg:px-8" aria-label="Global">
@@ -70,6 +91,9 @@ const mobileMenuOpen = ref(false)
                 </button>
             </div>
             <PopoverGroup class="hidden lg:flex lg:gap-x-12">
+                <NavLink :href="route('home')" :active="route().current('home')">
+                    Inicio
+                </NavLink>
                 <NavLink :href="route('tours.index')" :active="route().current('tours.index')">
                     Tours
                 </NavLink>
@@ -139,9 +163,52 @@ const mobileMenuOpen = ref(false)
                     </transition>
                 </Popover> -->
             </PopoverGroup>
+
             <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-                <a href="#" class="text-sm font-semibold leading-6 text-gray-900">Log in <span
-                        aria-hidden="true">&rarr;</span></a>
+                <Menu as="div" class="relative">
+                    <template v-if="user">
+                        <MenuButton class="-m-1.5 flex items-center p-1.5">
+                            <span class="sr-only">Open user menu</span>
+
+                            <span class="hidden lg:flex lg:items-center">
+                                <span class="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">{{
+                                    user.name
+                                    }}</span>
+                                <ChevronDownIcon class="w-5 h-5 ml-2 text-gray-400" aria-hidden="true" />
+                            </span>
+                        </MenuButton>
+                    </template>
+
+                    <template v-else>
+                        <!-- Botones de login y registro -->
+                        <Link href="/login" class="mr-4 text-sm font-semibold leading-6 text-gray-900">Iniciar sesión
+                        </Link>
+                        <Link href="/register" class="text-sm font-semibold leading-6 text-gray-900">Registrar</Link>
+                    </template>
+                    <transition enter-active-class="transition duration-100 ease-out"
+                        enter-from-class="transform scale-95 opacity-0" enter-to-class="transform scale-100 opacity-100"
+                        leave-active-class="transition duration-75 ease-in"
+                        leave-from-class="transform scale-100 opacity-100"
+                        leave-to-class="transform scale-95 opacity-0">
+                        <MenuItems
+                            class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
+                            <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
+                            <a :href="item.href"
+                                :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">{{
+                                    item.name }}</a>
+                            </MenuItem>
+                            <MenuItem>
+
+                                <button type="submit"
+                                    class="block w-full px-3 py-1 text-sm leading-6 text-left text-gray-900">
+                                    Logout
+                                </button>
+
+                            </MenuItem>
+                        </MenuItems>
+                    </transition>
+                </Menu>
+
             </div>
         </nav>
         <Dialog class="lg:hidden" @close="mobileMenuOpen = false" :open="mobileMenuOpen">
