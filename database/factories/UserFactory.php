@@ -36,6 +36,9 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'profile_photo_path' => null,
             'current_team_id' => null,
+            'last_login_at' => now(),
+            'country' => $this->faker->country(), // Añadido para que coincida con la migración
+            'is_active' => $this->faker->boolean(90) 
         ];
     }
 
