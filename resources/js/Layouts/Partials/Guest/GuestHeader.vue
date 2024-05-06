@@ -73,7 +73,8 @@ const userNavigation = [
 </script>
 
 <template>
-    <header class="bg-white">
+<header class="fixed top-0 left-0 z-50 w-full bg-transparent">
+        <!-- <header class="bg-transparent"> probar despues-->
         <nav class="flex items-center justify-between p-6 mx-auto max-w-7xl lg:px-8" aria-label="Global">
             <div class="flex lg:flex-1">
                 <a href="#" class="-m-1.5 p-1.5">
@@ -173,7 +174,7 @@ const userNavigation = [
                             <span class="hidden lg:flex lg:items-center">
                                 <span class="ml-4 text-sm font-semibold leading-6 text-gray-900" aria-hidden="true">{{
                                     user.name
-                                    }}</span>
+                                }}</span>
                                 <ChevronDownIcon class="w-5 h-5 ml-2 text-gray-400" aria-hidden="true" />
                             </span>
                         </MenuButton>
@@ -199,10 +200,10 @@ const userNavigation = [
                             </MenuItem>
                             <MenuItem>
 
-                                <button type="submit"
-                                    class="block w-full px-3 py-1 text-sm leading-6 text-left text-gray-900">
-                                    Logout
-                                </button>
+                            <button type="submit"
+                                class="block w-full px-3 py-1 text-sm leading-6 text-left text-gray-900">
+                                Logout
+                            </button>
 
                             </MenuItem>
                         </MenuItems>

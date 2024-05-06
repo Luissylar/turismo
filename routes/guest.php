@@ -10,7 +10,7 @@ use App\Http\Controllers\ElimiarController;
 
 use App\Http\Controllers\Guest\GuestTourController;
 
-
+use App\Http\Controllers\TestController;
 Route::get('/', [GuestHomeController::class, 'index'])->name('home');
 
 
@@ -18,3 +18,4 @@ Route::get('/', [GuestHomeController::class, 'index'])->name('home');
 Route::get('/tours', [GuestTourController::class, 'index'])->name('tours.index');
 //eliminar xd PUTO EL QUE LO LEA
 Route::get('/xd',[ElimiarController::class,'index'])->name('xd');
+Route::get('/lala',[TestController::class,'index'])->name('test');

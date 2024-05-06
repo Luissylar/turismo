@@ -45,6 +45,8 @@ import AdminLayout from '@/Layouts/AdminLayout.vue';
 
 
     </div><br>
+
+
   </AdminLayout>
 </template>
 
