@@ -10,5 +10,7 @@ Route::middleware(['web', 'auth'])->group(function () {
     // Redirección desde /admin a /admin/dashboard
     Route::redirect('/admin', '/admin/dashboard');
     // Ruta para el dashboard de administración utilizando el controlador
-    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
+        ->middleware('can:admin.dashboard')
+        ->name('admin.dashboard');
 });
