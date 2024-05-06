@@ -1,10 +1,10 @@
 <script setup>
-import AdminLayout from '@/Layouts/GuestLayout.vue';
+import GuestLayout from '@/Layouts/GuestLayout.vue';
 </script>
 
 
 <template>
-    <AdminLayout title="Tours">
+    <GuestLayout title="Tours">
         <section>
             <div class="relative flex items-center justify-center text-white bg-center bg-no-repeat bg-cover"
                 style="background-image: url('https://bing.com/th?id=OSGI.F39D9798C92E78B965070399A498A0E2&h=1000&w=1920&c=1&rs=1&o=3'); height: 50vh;">
@@ -20,5 +20,5 @@ import AdminLayout from '@/Layouts/GuestLayout.vue';
                 </div>
             </div> <!-- Aquí incluye tu contenido de Livewire -->
         </section>
-    </AdminLayout>
+    </GuestLayout>
 </template>

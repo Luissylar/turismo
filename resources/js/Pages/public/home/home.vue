@@ -1,14 +1,52 @@
 <script setup>
-import AdminLayout from '@/Layouts/GuestLayout.vue';
-import { ref } from 'vue';
+import GuestLayout from '@/Layouts/GuestLayout.vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { usePage } from '@inertiajs/vue3';
 
 const { props } = usePage();
-const tours = ref(props.tours);
+const tours = ref(props.tours.data);
+const nextUrl = ref(props.tours.next_page_url);
+
+const observer = ref(null);
+
+const loadMoreTours = () => {
+    if (nextUrl.value) {
+        Inertia.visit(nextUrl.value, {
+            preserveState: true,
+            onSuccess: (page) => {
+                tours.value.push(...page.props.tours.data);
+                nextUrl.value = page.props.tours.next_page_url;
+            }
+        });
+    }
+};
+
+const onIntersect = ([entry], observer) => {
+    if (entry.isIntersecting) {
+        observer.unobserve(entry.target);
+        loadMoreTours();
+    }
+};
+
+onMounted(() => {
+    const sentinel = document.getElementById('sentinel');
+    if (sentinel) {
+        observer.value = new IntersectionObserver(onIntersect, {
+            threshold: 1.0
+        });
+        observer.value.observe(sentinel);
+    }
+});
+
+onUnmounted(() => {
+    if (observer.value) {
+        observer.value.disconnect();
+    }
+});
 </script>
 
 <template>
-    <AdminLayout title="">
+    <GuestLayout title="Dashboard">
         <section class="relative bg-center bg-no-repeat bg-cover"
             style="background-image: url('https://bing.com/th?id=OSGI.F39D9798C92E78B965070399A498A0E2&h=1000&w=1920&c=1&rs=1&o=3');">
             <div
@@ -59,20 +97,20 @@ const tours = ref(props.tours);
 
 
             <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div v-if="tours && tours.length">
+                <div v-if="tours.length">
                     <h1 class="mb-5 text-2xl font-bold">Tours Disponibles</h1>
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                        <!-- Itera sobre cada tour y muestra la información como una tarjeta -->
                         <div v-for="tour in tours" :key="tour.id" class="p-4 bg-white rounded-lg shadow-md">
                             <h3 class="mb-2 text-xl font-semibold">{{ tour.title }}</h3>
                             <p class="mb-4">{{ tour.description_corta }}</p>
-                            <!-- Agrega más información del tour aquí si lo deseas -->
                             <button
                                 class="px-4 py-2 mt-auto font-bold text-white bg-blue-500 rounded hover:bg-blue-700">
                                 Ver más
                             </button>
                         </div>
                     </div>
+                    <!-- Elemento centinela para la observación -->
+                    <div id="sentinel" class="h-16"></div>
                 </div>
                 <div v-else>
                     <p>Cargando tours o no hay tours disponibles...</p>
@@ -82,7 +120,6 @@ const tours = ref(props.tours);
 
 
 
-
         </div>
-    </AdminLayout>
+    </GuestLayout>
 </template>

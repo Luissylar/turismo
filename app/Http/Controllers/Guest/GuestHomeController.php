@@ -14,10 +14,9 @@ class GuestHomeController extends Controller
 {
     public function index()
     {
-        // Paginar los tours, por ejemplo, 10 registros por página
-        $tours = Tour::paginate(10);
 
-        // Pasa los datos paginados a la vista usando Inertia
+        $tours = Tour::paginate(1);
+
         return Inertia::render('public/home/home', [
             'tours' => $tours
         ]);

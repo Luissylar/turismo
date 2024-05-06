@@ -45,7 +45,8 @@ const props = defineProps({
                             <Link :href="route('admin.dashboard')" :class="{
                                 'bg-gray-100 dark:bg-gray-700': route().current('admin.dashboard'),
                                 'hover:bg-gray-100 dark:hover:bg-gray-700': !route().current('admin.dashboard')
-                            }" class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-300 ease-in-out rounded-lg group dark:text-gray-200">
+                            }"
+                                class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-300 ease-in-out rounded-lg group dark:text-gray-200">
                             <svg class="flex-shrink-0 w-6 h-6 text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -59,11 +60,38 @@ const props = defineProps({
                             <span :class="{
                                 'animate-ping': route().current('admin.dashboard'),
                                 'opacity-75': !route().current('admin.dashboard')
-                            }" class="inline-flex items-center justify-center w-5 h-5 p-1 ml-3 text-sm font-medium rounded-full text-primary-800 bg-primary-100">
+                            }"
+                                class="inline-flex items-center justify-center w-5 h-5 p-1 ml-3 text-sm font-medium rounded-full text-primary-800 bg-primary-100">
                                 3
                             </span>
                             </Link>
                         </li>
+                        <li>
+                            <Link :href="route('admin.destinations.index')" :class="{
+                                'bg-gray-100 dark:bg-gray-700': route().current('admin.destinations.index'),
+                                'hover:bg-gray-100 dark:hover:bg-gray-700': !route().current('admin.destinations.index')
+                            }"
+                                class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-300 ease-in-out rounded-lg group dark:text-gray-200">
+                            <svg class="flex-shrink-0 w-6 h-6 text-gray-500 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                                fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M8.707 7.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l2-2a1 1 0 00-1.414-1.414L11 7.586V3a1 1 0 10-2 0v4.586l-.293-.293z">
+                                </path>
+                                <path
+                                    d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z">
+                                </path>
+                            </svg>
+                            <span class="flex-1 ml-3 whitespace-nowrap">Destinos</span>
+                            <span :class="{
+                                'animate-ping': route().current('admin.destinations.index'),
+                                'opacity-75': !route().current('admin.destinations.index')
+                            }"
+                                class="inline-flex items-center justify-center w-5 h-5 p-1 ml-3 text-sm font-medium rounded-full text-primary-800 bg-primary-100">
+                                3
+                            </span>
+                            </Link>
+                        </li>
+
 
                         <li>
                             <Link :href="route('dashboard')"
@@ -77,11 +105,13 @@ const props = defineProps({
                                     d="M3 5a2 2 0 012-2h1a1 1 0 010 2H5v7h2l1 2h4l1-2h2V5h-1a1 1 0 110-2h1a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2V5z">
                                 </path>
                             </svg>
-                            <span class="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
+                            <span class="flex-1 ml-3 whitespace-nowrap">das</span>
                             <span
                                 class="inline-flex items-center justify-center w-5 h-5 p-1 ml-3 text-sm font-medium rounded-full text-primary-800 bg-primary-100">3</span>
                             </Link>
                         </li>
+
+
                         <!-- <li>
                             <button type="button"
                                 class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
