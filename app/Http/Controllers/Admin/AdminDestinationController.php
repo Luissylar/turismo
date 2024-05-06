@@ -22,7 +22,7 @@ class AdminDestinationController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Admin/Destinations/Create');
     }
 
     /**
@@ -38,7 +38,7 @@ class AdminDestinationController extends Controller
      */
     public function show(Destination $destination)
     {
-        //
+        return Inertia::render('Admin/Destinations/Show');
     }
 
     /**
@@ -46,7 +46,7 @@ class AdminDestinationController extends Controller
      */
     public function edit(Destination $destination)
     {
-        //
+        return Inertia::render('Admin/Destinations/Edit');
     }
 
     /**
