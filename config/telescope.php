@@ -90,6 +90,15 @@ return [
     | the existing middleware. Or, you can simply stick with this list.
     |
     */
+    /*
+    |--------------------------------------------------------------------------
+    | Middleware para rutas de Telescope
+    |--------------------------------------------------------------------------
+    |
+    | acá agregas un permiso que sea algo como admin.telescope para que solo los
+    | administradores puedan ver las estadísticas de Telescope.
+    |
+    */
 
     'middleware' => [
         'web',
