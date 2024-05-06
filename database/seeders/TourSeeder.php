@@ -20,7 +20,7 @@ class TourSeeder extends Seeder
      */
     public function run(): void
     {
-        $tours = Tour::factory(20)->create();
+        $tours = Tour::factory(50)->create();
         $allDestinationIds = Destination::all()->pluck('id'); // Obtener todos los IDs de destinos
 
         //foreach para recorrer los tours
@@ -49,7 +49,7 @@ class TourSeeder extends Seeder
             ]);
 
 
-            
-        }   
+
+        }
     }
 }
