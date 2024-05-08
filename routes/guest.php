@@ -19,3 +19,9 @@ Route::get('/tours', [GuestTourController::class, 'index'])->name('tours.index')
 //eliminar xd PUTO EL QUE LO LEA
 Route::get('/xd',[ElimiarController::class,'index'])->name('xd');
 Route::get('/lala',[TestController::class,'index'])->name('test');
+
+
+Route::get('/test-redis', function () {
+    cache()->store('redis')->put('key', 'Redis is working!', 10);
+    return cache()->store('redis')->get('key');
+});

@@ -18,9 +18,7 @@ class AdminDestinationController extends Controller
             return [
                 'id' => $destination->id,
                 'title' => $destination->title,
-                'status' => $destination->status,
-                'viewUrl' => route('admin.destinations.show', $destination),
-                'editUrl' => route('admin.destinations.edit', $destination)
+                'status' => $destination->status
             ];
         });
 

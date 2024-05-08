@@ -14,7 +14,7 @@ Route::middleware(['web', 'auth'])->group(function () {
         ->middleware('can:admin.dashboard')
         ->name('admin.dashboard');
     //ruta para destinos de tipo resource
-    Route::resource('admin/destinations', AdminDestinationController::class)
+    Route::resource('/admin/destinations', AdminDestinationController::class)
         ->names([
             'index' => 'admin.destinations.index',
             'create' => 'admin.destinations.create',

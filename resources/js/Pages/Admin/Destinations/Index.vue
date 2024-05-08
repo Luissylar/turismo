@@ -1,19 +1,14 @@
 <script setup>
-import { usePage } from '@inertiajs/vue3';
+import { usePage,Link } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Breadcrumb from '@/Layouts/Partials/Admin/Breadcrumb.vue';
-// Utiliza usePage para acceder a los props de Inertia
+
 const { props } = usePage();
 
-
-
-
-
-//el array de breadcrumbs
+//Acá esta el array del pan, xdd, osea literal se traduce, pan de migas, la cosa es que es para la navegación, xd
 const breadcrumbs = [
     { name: 'admin.dashboard', label: 'Dashboard' },
     { name: 'admin.dashboard', label: 'Dashboard' },
-
     { name: 'admin.destinations.index', label: 'Destinos' }
 
 
@@ -24,6 +19,7 @@ const breadcrumbs = [
         <Breadcrumb :breadcrumbs="breadcrumbs" />
         <div class="mt-4">
             <h2 class="mb-4 text-2xl font-bold">Lista de Destinos</h2>
+            <Link :href="'/admin/destinations/create'">Crear</Link>
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">
                     <tr>
@@ -47,8 +43,9 @@ const breadcrumbs = [
                             {{ destination.status }}
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-right whitespace-nowrap">
-                            <a :href="destination.viewUrl" class="px-4 text-indigo-600 hover:text-indigo-900">Ver</a>
-                            <a :href="destination.editUrl" class="text-indigo-600 hover:text-indigo-900">Editar</a>
+                            <Link :href="'/admin/destinations/'+destination.id+'/edit'" class="px-4 text-indigo-600 hover:text-indigo-900">editar</Link>
+                            <Link :href="'/admin/destinations/'+destination.id"  class="px-4 text-indigo-600 hover:text-indigo-900">ver</Link>
+
                         </td>
                     </tr>
                 </tbody>
