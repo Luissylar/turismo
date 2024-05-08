@@ -18,7 +18,7 @@ import GuestLayout from '@/Layouts/GuestLayout.vue';
                     </h1>
                     <p class="mt-4 text-base sm:text-lg md:text-xl">Descubre increibles </p>
                 </div>
-            </div> <!-- Aquí incluye tu contenido de Livewire -->
+            </div>
         </section>
     </GuestLayout>
 </template>
