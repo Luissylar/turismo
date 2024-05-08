@@ -14,7 +14,19 @@ class AdminDestinationController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Admin/Destinations/Index');
+        $destinations = Destination::all()->map(function ($destination) {
+            return [
+                'id' => $destination->id,
+                'title' => $destination->title,
+                'status' => $destination->status,
+                'viewUrl' => route('admin.destinations.show', $destination),
+                'editUrl' => route('admin.destinations.edit', $destination)
+            ];
+        });
+
+        return Inertia::render('Admin/Destinations/Index', [
+            'destinations' => $destinations
+        ]);
     }
 
     /**
