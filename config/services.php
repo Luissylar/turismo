@@ -31,4 +31,21 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------|
+    | Integración con CULQI                                                    |
+    |--------------------------------------------------------------------------|
+    |                                                                          |
+    | Configuracion para culqi, falta integrar                                 |
+    |                                                                          |
+    */
+
+    'culqi' => [
+        'notifications' => [
+            'public_key' => env('CULQI_PUBLIC_KEY'),
+            'secret_key' => env('CULQI_SECRET_KEY'),
+            'rsa_id' => env('CULQI_RSA_ID'),
+            'rsa_public_key' => env('CULQI_RSA_PUBLIC_KEY'),
+        ],
+    ],
 ];
