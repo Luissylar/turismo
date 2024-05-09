@@ -12,15 +12,18 @@ class UserLogin extends Model
     protected $table = 'user_logins';
 
     protected $fillable = [
-        'user_id', 'ip_address', 'country', 'city', 'state', 'state_name'
+        'user_id', 'ip', 'iso_code', 'country', 'city', 'state', 'state_name', 'postal_code', 'latitude', 'longitude',
+        'timezone', 'continent', 'default', 'currency'
     ];
 
-    // Asegúrate de que 'created_at' sea manejado como una instancia de Carbon
-    protected $dates = ['created_at'];
-    
+    protected $casts = [
+        'default' => 'boolean', // Asegura que el campo 'default' se maneje como booleano
+    ];
+
+    protected $dates = ['created_at', 'updated_at']; // 'created_at' y 'updated_at' ya son manejados como Carbon por defecto
+
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id');
     }
 }
-
