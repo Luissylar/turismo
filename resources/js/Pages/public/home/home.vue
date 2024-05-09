@@ -46,7 +46,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <GuestLayout title="Dashboard">
+    <GuestLayout title="Inicio">
         <section class="relative bg-center bg-no-repeat bg-cover"
             style="background-image: url('https://bing.com/th?id=OSGI.F39D9798C92E78B965070399A498A0E2&h=1000&w=1920&c=1&rs=1&o=3');">
             <div
