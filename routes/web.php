@@ -22,3 +22,23 @@ Route::middleware([
         return Inertia::render('Dashboard');
     })->name('dashboard');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+use App\Jobs\HeavyJob;
+
+Route::get('/heavy-job', function () {
+    HeavyJob::dispatch(600851475143); // Un número grande para factorizar
+    return 'Factorization job dispatched!';
+});

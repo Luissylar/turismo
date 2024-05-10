@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDestinationController;
+use App\Http\Controllers\Admin\AdminMailTemplateController;
 
 Route::middleware(['web', 'auth'])->group(function () {
     // Redirección desde /admin a /admin/dashboard
@@ -21,4 +22,5 @@ Route::middleware(['web', 'auth'])->group(function () {
             'show' => 'admin.destinations.show',
             'edit' => 'admin.destinations.edit',
         ]);
+    Route::get('/admin/mail',[AdminMailTemplateController::class,'index'])->name('admin.mail');
 });

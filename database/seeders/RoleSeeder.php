@@ -25,5 +25,8 @@ class RoleSeeder extends Seeder
 
 
         Permission::create(['name' => 'admin.dashboard'])->syncRoles([$roleAdmin,$role2]);
+        Permission::create(['name' => 'horizon'])->syncRoles([$roleAdmin,$role2]);
+        Permission::create(['name' => 'telescope'])->syncRoles([$roleAdmin,$role2]);
+        Permission::create(['name' => 'pulse'])->syncRoles([$roleAdmin,$role2]);
     }
 }
