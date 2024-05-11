@@ -19,6 +19,8 @@ const breadcrumbs = [
         <Breadcrumb :breadcrumbs="breadcrumbs" />
         <div class="mt-4">
             <h2 class="mb-4 text-2xl font-bold">Lista de Destinos</h2>
+
+            
             <Link :href="'/admin/destinations/create'">Crear</Link>
             <table class="min-w-full divide-y divide-gray-200">
                 <thead class="bg-gray-50">

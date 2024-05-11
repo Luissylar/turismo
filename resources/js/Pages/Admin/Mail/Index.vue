@@ -14,6 +14,9 @@ const breadcrumbs = [
 
 ];
 </script>
+
+
+
 <template>
     <AdminLayout title="Mail">
         <Breadcrumb :breadcrumbs="breadcrumbs" />

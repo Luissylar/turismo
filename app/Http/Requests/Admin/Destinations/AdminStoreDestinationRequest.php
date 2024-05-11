@@ -11,7 +11,7 @@ class AdminStoreDestinationRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -19,10 +19,18 @@ class AdminStoreDestinationRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules()
     {
         return [
-            //
+            'title' => 'required|string|max:255|unique:destinations,title',
+            'description' => 'required|string',
+            'image' => 'required|image',
+            'address' => 'required|string|max:255',
+            'latitude' => 'required|string|max:255',
+            'longitude' => 'required|string|max:255',
+            'weather' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:destinations,slug',
+            'accesibility' => 'required|string|max:255',
         ];
     }
 }

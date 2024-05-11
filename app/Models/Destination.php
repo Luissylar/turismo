@@ -10,6 +10,7 @@ class Destination extends Model
     use HasFactory;
         //asignacion masiva con $guarded
     protected $guarded = ['id'];
+    
     //relacion muchos a muchos
     public function tours(){
         return $this->belongsToMany(Tour::class);

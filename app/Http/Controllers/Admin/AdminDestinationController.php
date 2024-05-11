@@ -7,6 +7,9 @@ use App\Models\Destination;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+
+use App\Http\Requests\Admin\Destinations\AdminStoreDestinationRequest;
+
 class AdminDestinationController extends Controller
 {
     /**
@@ -35,13 +38,21 @@ class AdminDestinationController extends Controller
         return Inertia::render('Admin/Destinations/Create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+
+    public function store(AdminStoreDestinationRequest $request)
     {
-        //
+        $destination = new Destination($request->validated());
+
+        // Trata la imagen
+        if ($request->hasFile('image')) {
+            $destination->image = $request->file('image')->store('destinations', 'public');
+        }
+
+        $destination->save();
+
+        return redirect()->route('admin.destinations.index')->with('message', 'Destino creado con éxito.');
     }
+    
 
     /**
      * Display the specified resource.
@@ -49,7 +60,7 @@ class AdminDestinationController extends Controller
     public function show(Destination $destination)
     {
         return Inertia::render('Admin/Destinations/Show', [
-            'destination' => $destination->only('id', 'title', 'description', 'address') // Asegúrate de incluir solo los campos necesarios
+            'destination' => $destination->only('id', 'title', 'description', 'address', 'slug') // Incluye 'slug' si es necesario para la vista
         ]);
     }
 

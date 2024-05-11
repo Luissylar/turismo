@@ -22,5 +22,6 @@ Route::middleware(['web', 'auth'])->group(function () {
             'show' => 'admin.destinations.show',
             'edit' => 'admin.destinations.edit',
         ]);
+        
     Route::get('/admin/mail',[AdminMailTemplateController::class,'index'])->name('admin.mail');
 });
