@@ -48,7 +48,9 @@ class AdminDestinationController extends Controller
      */
     public function show(Destination $destination)
     {
-        return Inertia::render('Admin/Destinations/Show');
+        return Inertia::render('Admin/Destinations/Show', [
+            'destination' => $destination->only('id', 'title', 'description', 'address') // Asegúrate de incluir solo los campos necesarios
+        ]);
     }
 
     /**
