@@ -1,17 +1,39 @@
-<script>
-export default {
-    name: 'Header',
-    // Aquí puedes agregar métodos, propiedades computadas, etc., si son necesarios.
-};
-import { ref } from 'vue'
-import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue'
-import { CheckIcon, ChevronDownIcon } from '@heroicons/vue/20/solid'
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue';
+import { Head, Link, router } from '@inertiajs/vue3';
+import { Listbox, ListboxButton, ListboxLabel, ListboxOption, ListboxOptions } from '@headlessui/vue';
+import { CheckIcon, ChevronDownIcon } from '@heroicons/vue/20/solid';
+import Dropdown from '@/Components/Dropdown.vue';
+import DropdownLink from '@/Components/DropdownLink.vue';
 
 const publishingOptions = [
     { title: 'Published', description: 'This job posting can be viewed by anyone who has the link.', current: true },
     { title: 'Draft', description: 'This job posting will no longer be publicly accessible.', current: false },
 ]
 
+const isOpen = ref(false)
+const menuContainer = ref(null)
+
+const toggleMenu = () => {
+    isOpen.value = !isOpen.value
+}
+
+const closeMenu = (event) => {
+    if (!menuContainer.value.contains(event.target)) {
+        isOpen.value = false
+    }
+}
+
+onMounted(() => {
+    document.addEventListener('click', closeMenu)
+})
+
+onUnmounted(() => {
+    document.removeEventListener('click', closeMenu)
+})
+const logout = () => {
+    router.post(route('logout'));
+};
 const selected = ref(publishingOptions[0])
 </script>
 <template>
@@ -77,6 +99,33 @@ const selected = ref(publishingOptions[0])
                                 clip-rule="evenodd"></path>
                         </svg>
                     </button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <button type="button" data-dropdown-toggle="notification-dropdown"
                         class="p-2 text-gray-500 rounded-lg hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-700">
@@ -364,15 +413,47 @@ const selected = ref(publishingOptions[0])
                         <div class="tooltip-arrow" data-popper-arrow></div>
                     </div>
 
-                    <div class="relative">
-                        <button type="button"
-                            class="flex text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
-                            id="user-menu-button-2" aria-expanded="false" aria-haspopup="true">
+
+                    <div class="relative" ref="menuContainer">
+                        <button v-if="$page.props.jetstream.managesProfilePhotos" @click="toggleMenu"
+                            class="flex items-center text-sm bg-gray-800 rounded-full focus:outline-none focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                            aria-haspopup="true">
                             <span class="sr-only">Open user menu</span>
-                            <img class="w-8 h-8 rounded-full" alt="User photo">
+                            <img class="object-cover w-8 h-8 rounded-full"
+                                :src="$page.props.auth.user.profile_photo_url" :alt="$page.props.auth.user.name">
+                        </button>
+                        <button v-else @click="toggleMenu" type="button"
+                            class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700">
+                            {{ $page.props.auth.user.name }}
+                            <svg class="w-4 h-4 ml-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                            </svg>
                         </button>
 
+                        <div v-show="isOpen" class="absolute right-0 z-20 w-48 py-2 mt-2 bg-white rounded-md shadow-xl">
+                            <div class="px-4 py-3">
+                                <span class="block text-sm font-semibold text-gray-900 dark:text-white">{{ $page.props.auth.user.name }}</span>
+                                <span class="block text-sm text-gray-500 truncate dark:text-gray-400">{{ $page.props.auth.user.email }}</span>
+                                <span class="block text-sm text-gray-500 truncate dark:text-gray-400">role: </span>
+                            </div>
+                            <div class="px-4 py-2 text-xs text-gray-400">Manage Account</div>
+                            <ul class="py-1 text-gray-500 dark:text-gray-400">
+                                <li>
+                                    <Link :href="route('profile.show')"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</Link>
+                                </li>
+                                <li>
+                                    <Link v-if="$page.props.jetstream.hasApiFeatures" :href="route('api-tokens.index')"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">API Tokens</Link>
+                                </li>
+                            </ul>
 
+                            <form @submit.prevent="logout" class="block">
+                                <button type="submit"
+                                    class="w-full px-4 py-2 text-sm text-left text-gray-700 hover:bg-gray-100">Logout</button>
+                            </form>
+                        </div>
                     </div>
 
                 </div>
