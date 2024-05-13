@@ -24,6 +24,7 @@ class AdminStoreDestinationRequest extends FormRequest
         return [
             'title' => 'required|string|max:255|unique:destinations,title',
             'description' => 'required|string',
+            'content'=> 'required|string',
             'image' => 'required|image',
             'address' => 'required|string|max:255',
             'latitude' => 'required|string|max:255',

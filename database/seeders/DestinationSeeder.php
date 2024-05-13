@@ -13,6 +13,6 @@ class DestinationSeeder extends Seeder
      */
     public function run(): void
     {
-        Destination::factory(200)->create();
+        Destination::factory(25)->create();
     }
 }

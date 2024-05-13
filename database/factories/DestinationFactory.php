@@ -22,6 +22,7 @@ class DestinationFactory extends Factory
             'description' => $this->faker->paragraph,
             'image' => $this->faker->imageUrl(),
             'address' => $this->faker->address,
+            'content'=> $this->faker->paragraph,
             'latitude' => $this->faker->latitude,
             'longitude' => $this->faker->longitude,
             'status' => $this->faker->randomElement(['ACTIVE', 'INACTIVE']),

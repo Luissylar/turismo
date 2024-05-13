@@ -17,6 +17,7 @@
         "laravel/tinker": "^2.9",
         "predis/predis": "^2.2",
         "spatie/laravel-database-mail-templates": "^3.6",
+        "spatie/laravel-mail-preview": "^6.2",
         "spatie/laravel-permission": "^6.7",
         "tightenco/ziggy": "^2.0",
         "torann/geoip": "^3.0"
