@@ -23,3 +23,8 @@ lazy loading
 
 
 ptobar pr
+
+
+
+usar despues, para insertar datos con markdown etc
+https://marked.js.org/

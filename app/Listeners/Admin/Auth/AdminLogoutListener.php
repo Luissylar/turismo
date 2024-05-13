@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Listeners\Admin;
+namespace App\Listeners\Admin\Auth;
 
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class eliminar
+class AdminLogoutListener
 {
     /**
      * Create the event listener.
@@ -18,7 +19,7 @@ class eliminar
     /**
      * Handle the event.
      */
-    public function handle(object $event): void
+    public function handle(Logout $event): void
     {
         //
     }

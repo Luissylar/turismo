@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners\Common\Auth;
+namespace App\Listeners\Admin\Auth;
 
-use Illuminate\Auth\Events\Lockout;
+use Illuminate\Auth\Events\Login;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class UserLockoutListener
+class AdminLoginListener
 {
     /**
      * Create the event listener.
@@ -19,7 +19,7 @@ class UserLockoutListener
     /**
      * Handle the event.
      */
-    public function handle(Lockout $event): void
+    public function handle(Login $event): void
     {
         //
     }

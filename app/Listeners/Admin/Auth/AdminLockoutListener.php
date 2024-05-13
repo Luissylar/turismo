@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Listeners\Common\Auth;
+namespace App\Listeners\Admin\Auth;
 
 use Illuminate\Auth\Events\Lockout;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class UserLockoutListener
+class AdminLockoutListener
 {
     /**
      * Create the event listener.
