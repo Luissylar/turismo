@@ -15,7 +15,14 @@ Route::get('/', [GuestHomeController::class, 'index'])->name('home');
 
 
 
-Route::get('/tours', [GuestTourController::class, 'index'])->name('tours.index');
+//Route::get('/tours/index', [GuestTourController::class, 'index'])->name('tours.index');
+//Route::get('/tours/show', [GuestTourController::class, 'show'])->name('tours.show');
+
+Route::get('/tours/index', [GuestTourController::class, 'index'])->name('tours.index');
+Route::get('/tours/show/{tour}', [GuestTourController::class, 'show'])->name('tours.show');
+
+
+
 //eliminar xd PUTO EL QUE LO LEA
 Route::get('/xd',[ElimiarController::class,'index'])->name('xd');
 Route::get('/lala',[TestController::class,'index'])->name('test');

@@ -64,3 +64,18 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+comandos para matias :
+
+-1 terminal
+npm install
+npm run dev 
+
+-2 terminal
+composer install
+composer update 
+php artisan serve 
+
+
+
