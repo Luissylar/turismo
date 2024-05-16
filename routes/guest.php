@@ -18,8 +18,8 @@ Route::get('/', [GuestHomeController::class, 'index'])->name('home');
 //Route::get('/tours/index', [GuestTourController::class, 'index'])->name('tours.index');
 //Route::get('/tours/show', [GuestTourController::class, 'show'])->name('tours.show');
 
-Route::get('/tours/index', [GuestTourController::class, 'index'])->name('tours.index');
-Route::get('/tours/show/{tour}', [GuestTourController::class, 'show'])->name('tours.show');
+Route::get('/tours', [GuestTourController::class, 'index'])->name('tours.index');
+Route::get('/tours/{tour}', [GuestTourController::class, 'show'])->name('tours.show');
 
 
 

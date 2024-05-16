@@ -15,7 +15,7 @@ tours.value = props.tours;
 
 
 <template>
-    
+
     <GuestLayout title="Tours">
         <section>
             <div class="relative flex items-center justify-center text-white bg-center bg-no-repeat bg-cover"
@@ -32,7 +32,7 @@ tours.value = props.tours;
                 </div>
             </div>
         </section>
-        
+
         <div class="py-24 bg-white sm:py-32">
             <ul>
                 <li v-for="tour in tours" :key="tour.id">
@@ -83,7 +83,7 @@ tours.value = props.tours;
                                         </p>
                                         <!--boton que envia los datos -->
                                         <div class="block w-full px-3 py-2 mt-10 text-sm font-semibold text-center text-white bg-indigo-600 rounded-md shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                            <Link :href="`/tours/show/${tour.id}`">Ver Detalles del Tour</Link>
+                                            <Link :href="`/tours/${tour.id}`">Ver Detalles del Tour</Link>
                                         </div>
 
                                         
@@ -96,6 +96,6 @@ tours.value = props.tours;
                 </li>
             </ul>
         </div>
-        
+
     </GuestLayout>
 </template>
