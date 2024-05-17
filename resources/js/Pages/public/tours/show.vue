@@ -23,6 +23,7 @@ const descriptionHTML = computed(() => {
     const rawHtml = md.render(tour.value.description_larga);
     return DOMPurify.sanitize(rawHtml);
 });
+
 </script>
 
 <template>
@@ -216,7 +217,9 @@ const descriptionHTML = computed(() => {
                                             <h4 class="text-xl font-bold text-gray-900 dark:text-white">
                                                 <a href="#" class="hover:underline">{{ itinerary.title }}</a>
                                             </h4>
+
                                             <p class="mt-2 text-base font-normal text-gray-500 dark:text-gray-400">
+
                                                 {{ itinerary.description }}
                                             </p>
                                         </div>
@@ -226,6 +229,25 @@ const descriptionHTML = computed(() => {
 
                         </div>
                     </div>
+                    <div>
+                        <h3>servicios incluidos</h3>
+                    </div>
+                    <div>
+                        <h3>servicios no incluidos</h3>
+                    </div>
+                    <div>
+                        <h3>restricciones</h3>
+                    </div>
+
+                    <div>
+                        <h3>opiniones</h3>
+                    </div>
+
+
+                    <div>
+                        <h3>preguntas frecuentes</h3>
+                    </div>
+
 
 
 
@@ -561,24 +583,43 @@ const descriptionHTML = computed(() => {
                 </aside>
             </div>
         </div>
+        <div class="flex flex-col min-h-full">
+
+            <div class="flex items-start w-full px-4 py-10 mx-auto gap-x-8 sm:px-6 lg:px-8" style="max-width: 100rem;">
+
+                <main class="flex-1">
+                    <h2>Descubre más tours</h2>
+                    
+
+                    <!-- Eliminar la secction siguiente -->
+                    <section>
+                        <div class="relative flex items-center justify-center text-white bg-center bg-no-repeat bg-cover"
+                            style="background-image: url('https://bing.com/th?id=OSGI.F39D9798C92E78B965070399A498A0E2&h=1000&w=1920&c=1&rs=1&o=3'); height: 50vh;">
+                            <div class="absolute inset-0 bg-black/40"></div>
+                            <div class="z-10 flex flex-col items-center justify-center p-4 text-center">
+
+                                <h1
+                                    class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+                                    <span
+                                        class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">SHOW
+                                        TOURS</span>
+                                </h1>
+                                <p class="mt-4 text-base sm:text-lg md:text-xl">Descubre increibles </p>
+                            </div>
+                        </div>
+                    </section>
 
 
-        <section>
-            <div class="relative flex items-center justify-center text-white bg-center bg-no-repeat bg-cover"
-                style="background-image: url('https://bing.com/th?id=OSGI.F39D9798C92E78B965070399A498A0E2&h=1000&w=1920&c=1&rs=1&o=3'); height: 50vh;">
-                <div class="absolute inset-0 bg-black/40"></div> <!-- oscurecimiento más intenso -->
-                <div class="z-10 flex flex-col items-center justify-center p-4 text-center">
-                    <!-- Título centrado y grande -->
-                    <h1
-                        class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-                        <span
-                            class="underline underline-offset-3 decoration-8 decoration-blue-400 dark:decoration-blue-600">SHOW
-                            TOURS</span>
-                    </h1>
-                    <p class="mt-4 text-base sm:text-lg md:text-xl">Descubre increibles </p>
-                </div>
+                </main>
+
             </div>
-        </section>
+
+        </div>
+
+
+
+
+
 
         <section class="py-8 antialiased bg-white md:py-16 xl:py-24 dark:bg-gray-900">
             <div class="max-w-screen-xl mx-auto">

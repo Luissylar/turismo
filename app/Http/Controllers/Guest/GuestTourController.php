@@ -26,6 +26,7 @@ class GuestTourController extends Controller
                 'max_personas' => $tour->max_personas,
                 'min_personas' => $tour->min_personas,
                 'slug' => $tour->slug,
+
                 'idioma' => $tour->idioma,
                 'precio' => $tour->precio,
             ];
@@ -40,13 +41,7 @@ class GuestTourController extends Controller
 
     public function show(Tour $tour)
     {
-        //$tou = Tour::with(['itineraries', 'included_services', 'excluded_services','restrictions','faqs'])->findOrFail($id);
-        // 'itineraries' => $tour->itineraries,
-        // 'includedServices' => $tour->included_services,
-        // 'excludedServices' => $tour->excluded_services,
-        // 'restrictions' => $tour->restrictions,
-        // 'faqs' => $tour->faqs
-        // Cargar las relaciones necesarias
+
         $tour->load(['itineraries', 'included_services', 'excluded_services', 'restrictions', 'faqs']);
 
         // Retornar los datos a la vista con Inertia
