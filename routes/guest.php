@@ -5,7 +5,6 @@ use App\Http\Controllers\Guest\GuestHomeController;
 
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use App\Http\Controllers\ElimiarController;
 
 
 use App\Http\Controllers\Guest\GuestTourController;
@@ -19,14 +18,13 @@ Route::get('/', [GuestHomeController::class, 'index'])->name('home');
 //Route::get('/tours/show', [GuestTourController::class, 'show'])->name('tours.show');
 
 Route::get('/tours', [GuestTourController::class, 'index'])->name('tours.index');
-Route::get('/tours/{tour}', [GuestTourController::class, 'show'])->name('tours.show');
+//Route::get('/tours/{tour}', [GuestTourController::class, 'show'])->name('tours.show');
+
+Route::get('/tours/{tour:slug}', [GuestTourController::class, 'show'])->name('tours.show');
 
 
 
 //eliminar xd PUTO EL QUE LO LEA
-Route::get('/xd',[ElimiarController::class,'index'])->name('xd');
-Route::get('/lala',[TestController::class,'index'])->name('test');
-
 
 Route::get('/test-redis', function () {
     cache()->store('redis')->put('key', 'Redis is working!', 10);
