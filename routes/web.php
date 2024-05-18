@@ -28,17 +28,18 @@ Route::middleware([
 
 
 
+use App\Mail\Common\Auth\WelcomeNewUserMail;
+use Illuminate\Support\Facades\Mail;
 
-
-
-
-
-
-
-
-use App\Jobs\HeavyJob;
-
-Route::get('/heavy-job', function () {
-    HeavyJob::dispatch(600851475143); // Un número grande para factorizar
-    return 'Factorization job dispatched!';
+Route::get('/test-email', function () {
+    $user = \App\Models\User::first(); // Ajusta esto para seleccionar un usuario de prueba
+    Mail::to($user->email)->send(new WelcomeNewUserMail($user));
+    return 'Correo enviado!';
 });
+
+
+
+
+
+
+

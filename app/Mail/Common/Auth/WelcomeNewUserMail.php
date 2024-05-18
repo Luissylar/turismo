@@ -8,17 +8,22 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
-class Elimnir extends Mailable
+use App\Models\User;
+class WelcomeNewUserMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
+
+    public $user;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        //
+        $this->user = $user;
+        Log::info("Creating WelcomeNewUserMail instance for user: {$user->email}");
     }
 
     /**
@@ -27,7 +32,7 @@ class Elimnir extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Elimnir',
+            subject: 'Welcome New User Mail',
         );
     }
 
@@ -37,7 +42,10 @@ class Elimnir extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.Common.Auth.WelcomeUser',
+            with: [
+                'user' => $this->user,
+            ],
         );
     }
 
@@ -49,5 +57,13 @@ class Elimnir extends Mailable
     public function attachments(): array
     {
         return [];
+    }
+
+    /**
+     * Handle a job failure.
+     */
+    public function failed(\Exception $exception): void
+    {
+        Log::error("Failed to send WelcomeNewUserMail to {$this->user->email}: {$exception->getMessage()}");
     }
 }
