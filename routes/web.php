@@ -2,16 +2,11 @@
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\Client\ClientBillingController;
 use Inertia\Inertia;
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
+
 
 Route::middleware([
     'auth:sanctum',
@@ -23,23 +18,7 @@ Route::middleware([
     })->name('dashboard');
 });
 
+Route::middleware(['web', 'auth'])->group(function () {
 
-
-
-
-
-use App\Mail\Common\Auth\WelcomeNewUserMail;
-use Illuminate\Support\Facades\Mail;
-
-Route::get('/test-email', function () {
-    $user = \App\Models\User::first(); // Ajusta esto para seleccionar un usuario de prueba
-    Mail::to($user->email)->send(new WelcomeNewUserMail($user));
-    return 'Correo enviado!';
+    Route::get('/billings', [ClientBillingController::class, 'index'])->name('client.billings.index');
 });
-
-
-
-
-
-
-

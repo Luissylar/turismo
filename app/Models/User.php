@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+
+use function Illuminate\Events\queueable;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -91,5 +93,14 @@ class User extends Authenticatable
     public function tours_comprados()
     {
         return $this->belongsToMany(Tour::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::updated(queueable(function (User $customer) {
+            if ($customer->hasStripeId()) {
+                $customer->syncStripeCustomerDetails();
+            }
+        }));
     }
 }
