@@ -13,6 +13,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 use Spatie\Permission\Traits\HasRoles;
 
+use Laravel\Cashier\Billable;
+
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -22,6 +24,9 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
+
+
+    use Billable;
 
     /**
      * The attributes that are mass assignable.
