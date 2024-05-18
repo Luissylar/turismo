@@ -28,7 +28,8 @@ return new class extends Migration
             $table->string('profile_photo_path', 2048)->nullable();
             $table->timestamp('last_login_at')->nullable();
             $table->boolean('is_active')->nullable()->default(1);
-            $table->string('country')->nullable();    
+            $table->string('country')->nullable();
+            $table->string('language')->default('es');
             $table->timestamps();
         });
 
