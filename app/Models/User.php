@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+
+use function Illuminate\Events\queueable;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -13,6 +15,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 use Spatie\Permission\Traits\HasRoles;
 
+use Laravel\Cashier\Billable;
+
 class User extends Authenticatable
 {
     use HasApiTokens;
@@ -22,6 +26,9 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
+
+
+    use Billable;
 
     /**
      * The attributes that are mass assignable.
@@ -86,5 +93,14 @@ class User extends Authenticatable
     public function tours_comprados()
     {
         return $this->belongsToMany(Tour::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::updated(queueable(function (User $customer) {
+            if ($customer->hasStripeId()) {
+                $customer->syncStripeCustomerDetails();
+            }
+        }));
     }
 }
