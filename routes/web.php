@@ -21,4 +21,8 @@ Route::middleware([
 Route::middleware(['web', 'auth'])->group(function () {
 
     Route::get('/billings', [ClientBillingController::class, 'index'])->name('client.billings.index');
+    Route::post('/billing/payment-method', [ClientBillingController::class, 'storePaymentMethod'])->name('billing.payment-method.store');
+    Route::delete('/billing/payment-method/{paymentMethodId}', [ClientBillingController::class, 'deletePaymentMethod'])->name('billing.payment-method.delete');
+
+//
 });

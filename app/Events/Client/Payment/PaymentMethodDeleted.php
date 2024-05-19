@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events\Client;
+namespace App\Events\Client\Payment;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -10,17 +10,31 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class eliminar
+
+
+
+
+use App\Models\User;
+
+
+class PaymentMethodDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     /**
      * Create a new event instance.
      */
-    public function __construct()
+
+    public $user;
+    public $paymentMethodId;
+
+
+    public function __construct(User $user, $paymentMethodId)
     {
-        //
+        $this->user = $user;
+        $this->paymentMethodId = $paymentMethodId;
     }
+
 
     /**
      * Get the channels the event should broadcast on.
