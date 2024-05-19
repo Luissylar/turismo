@@ -36,6 +36,7 @@ class PaymentMethodAddedNotification extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
+
         return (new MailMessage)
             ->subject('Nuevo método de pago agregado')
             ->greeting('¡Hola ' . $notifiable->name . '!')
@@ -54,6 +55,7 @@ class PaymentMethodAddedNotification extends Notification implements ShouldQueue
             ->line('Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en comunicarte con nosotros.')
             ->salutation('Atentamente,')
             ->salutation('El equipo de Soporte de Nuestra Empresa');
+
     }
 
 
