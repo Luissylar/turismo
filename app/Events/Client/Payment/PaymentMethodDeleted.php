@@ -1,5 +1,5 @@
 <?php
-
+// cuesstionable, si quieres mandar un correo de este tipo, pero en fin, 
 namespace App\Events\Client\Payment;
 
 use Illuminate\Broadcasting\Channel;
