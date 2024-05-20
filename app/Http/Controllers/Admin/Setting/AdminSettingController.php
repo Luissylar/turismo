@@ -12,6 +12,6 @@ class AdminSettingController extends Controller
     public function index()
     {
         //return "Dashboard de administración";
-        return Inertia::render('Admin/Dashboard');
+        return Inertia::render('Admin/Setting/Setting');
     }
 }

@@ -6,6 +6,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminDestinationController;
 use App\Http\Controllers\Admin\AdminMailTemplateController;
+use App\Http\Controllers\Admin\Help\AdminHelpController;
+use App\Http\Controllers\Admin\Profile\AdminProfileController;
 use App\Http\Controllers\Admin\Setting\AdminSettingController;
 
 
@@ -28,6 +30,10 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::get('/admin/mail',[AdminMailTemplateController::class,'index'])->name('admin.mail');
 
     Route::get('/admin/setting',[AdminSettingController::class,'index'])->name('admin.setting');
+    Route::get('/admin/profile',[AdminProfileController::class,'index'])->name('admin.profile.show');
+
+    Route::get('/admin/help',[AdminHelpController::class,'index'])->name('admin.help.index');
+
 
 
 

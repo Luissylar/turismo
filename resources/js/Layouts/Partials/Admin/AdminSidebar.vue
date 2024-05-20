@@ -267,8 +267,8 @@ const isHovered = ref(false);
                             </ul>
                         </li> -->
                     </ul>
-                    <!-- <div class="pt-2 space-y-2">
-                        <a href="" target="_blank"
+                    <div class="pt-2 space-y-2">
+                        <!-- <a href="" target="_blank"
                             class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
                             <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -288,9 +288,9 @@ const isHovered = ref(false);
                                     clip-rule="evenodd"></path>
                             </svg>
                             <span class="ml-3" sidebar-toggle-item>Documentación</span>
-                        </a>
+                        </a> -->
 
-                        <a href="https://github.com/themesberg/flowbite/issues" target="_blank"
+                        <Link :href="route('admin.help.index')"
                             class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
                             <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
                                 fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -299,37 +299,41 @@ const isHovered = ref(false);
                                     clip-rule="evenodd"></path>
                             </svg>
                             <span class="ml-3" sidebar-toggle-item>Ayuda</span>
-                        </a>
-                    </div> -->
+                        </Link>
+                    </div>
                 </div>
             </div>
             <div class="absolute bottom-0 left-0 justify-center hidden w-full p-4 space-x-4 lg:flex">
 
-                <a href="#"
+                <Link :href="route('admin.profile.show')"
                     class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
-                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z">
-                        </path>
-                    </svg>
-                </a>
+                <svg class="w-[25px] h-[25px] text-gray-800 dark:text-white" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd"
+                        d="M12 20a7.966 7.966 0 0 1-5.002-1.756l.002.001v-.683c0-1.794 1.492-3.25 3.333-3.25h3.334c1.84 0 3.333 1.456 3.333 3.25v.683A7.966 7.966 0 0 1 12 20ZM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10c0 5.5-4.44 9.963-9.932 10h-.138C6.438 21.962 2 17.5 2 12Zm10-5c-1.84 0-3.333 1.455-3.333 3.25S10.159 13.5 12 13.5c1.84 0 3.333-1.455 3.333-3.25S13.841 7 12 7Z"
+                        clip-rule="evenodd" />
+                </svg>
+
+                </Link>
 
 
 
                 <Link :href="route('admin.setting')" data-tooltip-target="tooltip-settings"
                     class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white"
                     @mouseover="isHovered = true" @mouseleave="isHovered = false" @click="isActive = !isActive">
-                <svg :class="['w-6 h-6 transition-transform',
+                <svg :class="[
+                    'w-6 h-6 transition-transform transition-colors',
                     {
-                        'animate-spin': route().current('admin.setting') || isHovered,
-                        'hover:animate-spin': !route().current('admin.setting') && !isHovered
-                    }]" fill="currentColor"
-                    viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        'animate-spin text-blue-500': route().current('admin.setting') || isHovered,
+                        'hover:animate-spin text-gray-500': !route().current('admin.setting') && !isHovered
+                    }
+                ]" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                         d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z"
                         clip-rule="evenodd"></path>
                 </svg>
                 </Link>
+
 
                 <div id="tooltip-settings" role="tooltip"
                     class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
@@ -463,6 +467,156 @@ const isHovered = ref(false);
 
         </div>
     </aside>
+    <!--
+    Posiblemente incorporar para pantallas muy grandes y colocar algun menu que lo abra  -->
+    <!-- <aside
+        class="fixed top-0 bottom-0 right-0 z-30 hidden w-16 h-full bg-white border-l border-gray-200 lg:block dark:bg-gray-800 dark:border-gray-700 pt-14">
+        <div class="divide-y divide-gray-100 dark:divide-gray-700">
+            <ul class="px-3 py-5 space-y-2">
+                <li>
+                    <a href="#" data-tooltip-target="calendar-tooltip" data-tooltip-placement="left"
+                        class="flex items-center p-2 text-gray-500 transition duration-75 rounded-lg dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z">
+                            </path>
+                        </svg>
+                        <span class="sr-only"></span>
+                    </a>
+                    <div id="calendar-tooltip" role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                        Calendar
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" data-tooltip-target="tooltip-notes" data-tooltip-placement="left"
+                        class="flex items-center p-2 text-gray-500 transition duration-75 rounded-lg dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <path
+                                d="M11 3a1 1 0 10-2 0v1a1 1 0 102 0V3zM15.657 5.757a1 1 0 00-1.414-1.414l-.707.707a1 1 0 001.414 1.414l.707-.707zM18 10a1 1 0 01-1 1h-1a1 1 0 110-2h1a1 1 0 011 1zM5.05 6.464A1 1 0 106.464 5.05l-.707-.707a1 1 0 00-1.414 1.414l.707.707zM5 10a1 1 0 01-1 1H3a1 1 0 110-2h1a1 1 0 011 1zM8 16v-1h4v1a2 2 0 11-4 0zM12 14c.015-.34.208-.646.477-.859a4 4 0 10-4.954 0c.27.213.462.519.476.859h4.002z">
+                            </path>
+                        </svg>
+                        <span class="sr-only"></span>
+                    </a>
+                    <div id="tooltip-notes" role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                        Notes
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" data-tooltip-target="tooltip-todo-list" data-tooltip-placement="left"
+                        class="flex items-center p-2 text-gray-500 transition duration-75 rounded-lg dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
+                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z">
+                            </path>
+                        </svg>
+                        <span class="sr-only"></span>
+                    </a>
+                    <div id="tooltip-todo-list" role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip whitespace-nowrap">
+                        To-do list
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" data-tooltip-target="tooltip-users" data-tooltip-placement="left"
+                        class="flex items-center p-2 text-gray-500 transition duration-75 rounded-lg dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <path
+                                d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z">
+                            </path>
+                        </svg>
+                        <span class="sr-only"></span>
+                    </a>
+                    <div id="tooltip-users" role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                        Users
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" data-tooltip-target="tooltip-media" data-tooltip-placement="left"
+                        class="flex items-center p-2 text-gray-500 transition duration-75 rounded-lg dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <path
+                                d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM14.553 7.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z">
+                            </path>
+                        </svg>
+                        <span class="sr-only"></span>
+                    </a>
+                    <div id="tooltip-media" role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                        Media
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </li>
+            </ul>
+
+            <ul class="px-3 py-5 space-y-2">
+                <li>
+                    <a href="#" data-tooltip-target="tooltip-stats" data-tooltip-placement="left"
+                        class="flex items-center p-2 text-gray-500 transition duration-75 rounded-lg dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                d="M3 3a1 1 0 000 2v8a2 2 0 002 2h2.586l-1.293 1.293a1 1 0 101.414 1.414L10 15.414l2.293 2.293a1 1 0 001.414-1.414L12.414 15H15a2 2 0 002-2V5a1 1 0 100-2H3zm11 4a1 1 0 10-2 0v4a1 1 0 102 0V7zm-3 1a1 1 0 10-2 0v3a1 1 0 102 0V8zM8 9a1 1 0 00-2 0v2a1 1 0 102 0V9z">
+                            </path>
+                        </svg>
+                        <span class="sr-only"></span>
+                    </a>
+                    <div id="tooltip-stats" role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                        Statistics
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" data-tooltip-target="tooltip-location" data-tooltip-placement="left"
+                        class="flex items-center p-2 text-gray-500 transition duration-75 rounded-lg dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z">
+                            </path>
+                        </svg>
+                        <span class="sr-only"></span>
+                    </a>
+                    <div id="tooltip-location" role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip">
+                        Locations
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" data-tooltip-target="tooltip-new" data-tooltip-placement="left"
+                        class="flex items-center p-2 text-gray-500 transition duration-75 rounded-lg dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"
+                            aria-hidden="true">
+                            <path clip-rule="evenodd" fill-rule="evenodd"
+                                d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z">
+                            </path>
+                        </svg>
+                        <span class="sr-only"></span>
+                    </a>
+                    <div id="tooltip-new" role="tooltip"
+                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip whitespace-nowrap">
+                        New item
+                        <div class="tooltip-arrow" data-popper-arrow></div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </aside> -->
 </template>
 
 
@@ -470,5 +624,9 @@ const isHovered = ref(false);
 <style scoped>
 .rotate-180 {
     transform: rotate(180deg);
+}
+
+.hover\\:scale-110:hover {
+    transform: scale(1.1);
 }
 </style>
