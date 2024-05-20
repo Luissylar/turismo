@@ -30,6 +30,7 @@
         "quill": "^2.0.2",
         "radix-vue": "^1.7.3",
         "vee-validate": "^4.12.8",
+        "vue-toastification": "^2.0.0-rc.5",
         "yup": "^1.4.0"
     }
 }
