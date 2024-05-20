@@ -65,6 +65,13 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
+## Librerías utilizadas
+
+Este proyecto utiliza las siguientes librerías de código abierto:
+
+- [Quill.js](https://github.com/quilljs/quill): Un editor WYSIWYG poderoso y extensible.
+
+
 
 comandos para matias :
 

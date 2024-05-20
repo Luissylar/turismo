@@ -16,13 +16,16 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description');
-            $table->text('content');
+
+            $table->longText('content');
             $table->string('image');
+            //En acá, se colocara la direccion de google maps
             $table->string('address');
-            $table->string('latitude');
-            $table->string('longitude');
+
+            $table->string('latitude')->nullable();
+            $table->string('longitude')->nullable();
             $table->enum('status', ['ACTIVE', 'INACTIVE'])->default('ACTIVE');
-            $table->string('weather');
+            $table->string('weather')->nullable();
             $table->string('slug');
             $table->string('accesibility');
             $table->timestamps();

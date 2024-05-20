@@ -48,21 +48,39 @@ class AdminDestinationController extends Controller
             $destination->image = $request->file('image')->store('destinations', 'public');
         }
 
-        $destination->save();
-
-        return redirect()->route('admin.destinations.index')->with('message', 'Destino creado con éxito.');
+        try {
+            $destination->save();
+            return redirect()->route('admin.destinations.create')->with('success', 'Destino creado con éxito.');
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'message' => 'Error al guardar el destino.',
+                'errors' => [
+                    'general' => [$e->getMessage()],
+                ]
+            ])->withInput();
+        }
     }
-    
+
+
+
+
 
     /**
      * Display the specified resource.
      */
     public function show(Destination $destination)
     {
+        // Asumiendo que las imágenes están en public/storage/destinations/
+        $destination->image = url('storage/destinations/' . basename($destination->image));
+
         return Inertia::render('Admin/Destinations/Show', [
-            'destination' => $destination->only('id', 'title', 'description', 'address', 'slug') // Incluye 'slug' si es necesario para la vista
+            'destination' => $destination->only([
+                'id', 'title', 'description', 'content', 'image', 'address',
+                'latitude', 'longitude', 'status', 'weather', 'slug', 'accesibility'
+            ])
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.

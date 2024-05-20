@@ -1,7 +1,8 @@
 <script setup>
-import { usePage,Link } from '@inertiajs/vue3';
+import { usePage, Link } from '@inertiajs/vue3';
 import AdminLayout from '@/Layouts/AdminLayout.vue';
 import Breadcrumb from '@/Layouts/Partials/Admin/Breadcrumb.vue';
+import { useToast } from 'vue-toastification';
 
 const { props } = usePage();
 
@@ -13,6 +14,12 @@ const breadcrumbs = [
 
 
 ];
+
+const toast = useToast();
+
+const showToast = () => {
+    toast.success('¡Hola, este es un toast de éxito!');
+};
 </script>
 
 
@@ -20,7 +27,7 @@ const breadcrumbs = [
 <template>
     <AdminLayout title="Mail">
         <Breadcrumb :breadcrumbs="breadcrumbs" />
-aCÁ SERA PARA LOS MAILS, CREAR ETC ETC
-
+        aCÁ SERA PARA LOS MAILS, CREAR ETC ETC
+        <button @click="showToast">Mostrar Toast</button>
     </AdminLayout>
 </template>
