@@ -101,6 +101,10 @@ const userNavigation = [
                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                     Destinos
                 </NavLink>
+                <NavLink :href="route('cart.index')" :active="route().current('cart.index')">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                     cart
+                </NavLink>
 
                 <Popover class="relative">
                     <PopoverButton class="flex items-center text-sm font-semibold leading-6 text-gray-900 gap-x-1">
