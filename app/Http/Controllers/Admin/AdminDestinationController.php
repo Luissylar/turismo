@@ -48,11 +48,22 @@ class AdminDestinationController extends Controller
             $destination->image = $request->file('image')->store('destinations', 'public');
         }
 
-        $destination->save();
-
-        return redirect()->route('admin.destinations.index')->with('message', 'Destino creado con éxito.');
+        try {
+            $destination->save();
+            return redirect()->route('admin.destinations.create')->with('success', 'Destino creado con éxito.');
+        } catch (\Exception $e) {
+            return back()->withErrors([
+                'message' => 'Error al guardar el destino.',
+                'errors' => [
+                    'general' => [$e->getMessage()],
+                ]
+            ])->withInput();
+        }
     }
-    
+
+
+
+
 
     /**
      * Display the specified resource.
