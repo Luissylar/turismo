@@ -2,7 +2,7 @@
 
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\Guest\GuestHomeController;
-
+use App\Http\Controllers\Guest\GuestShoppingCartController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -10,6 +10,8 @@ use Inertia\Inertia;
 use App\Http\Controllers\Guest\GuestTourController;
 
 use App\Http\Controllers\TestController;
+
+
 Route::get('/', [GuestHomeController::class, 'index'])->name('home');
 
 
@@ -22,7 +24,9 @@ Route::get('/tours', [GuestTourController::class, 'index'])->name('tours.index')
 
 Route::get('/tours/{tour:slug}', [GuestTourController::class, 'show'])->name('tours.show');
 
+//RUTAS  CART
 
+Route::get('/cart', [GuestShoppingCartController::class, 'index'])->name('cart.index');
 
 //eliminar xd PUTO EL QUE LO LEA
 
