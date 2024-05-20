@@ -22,15 +22,21 @@ class AdminStoreDestinationRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:255|unique:destinations,title',
+            'title' => 'string|max:255|unique:destinations,title',
             'description' => 'required|string',
             'content'=> 'required|string',
             'image' => 'required|image',
             'address' => 'required|string|max:255',
-            'latitude' => 'required|string|max:255',
-            'longitude' => 'required|string|max:255',
-            'weather' => 'required|string|max:255',
-            'slug' => 'required|string|max:255|unique:destinations,slug',
+            'latitude' => 'nullable|string|max:255',
+            'longitude' => 'nullable|string|max:255',
+            'weather' => 'nullable|string|max:255',
+            'slug' => [
+                'required',
+                'string',
+                'max:255',
+                'unique:destinations,slug',
+                'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', // Expresión regular mejorada para validar el slug
+            ],
             'accesibility' => 'required|string|max:255',
         ];
     }

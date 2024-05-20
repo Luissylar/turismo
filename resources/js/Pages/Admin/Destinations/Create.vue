@@ -133,6 +133,51 @@ const quillOptions = {
         ]
     }
 };
+
+
+
+const isAutoSlug = ref(true);
+
+const generateSlug = (title) => {
+    // Mapa de reemplazo de caracteres especiales
+    const map = {
+        'ñ': 'n', 'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'ü': 'u',
+        'À': 'A', 'Á': 'A', 'Â': 'A', 'Ã': 'A', 'Ä': 'A', 'Å': 'A', 'Æ': 'AE', 'Ç': 'C',
+        'È': 'E', 'É': 'E', 'Ê': 'E', 'Ë': 'E', 'Ì': 'I', 'Í': 'I', 'Î': 'I', 'Ï': 'I',
+        'Ð': 'D', 'Ñ': 'N', 'Ò': 'O', 'Ó': 'O', 'Ô': 'O', 'Õ': 'O', 'Ö': 'O', 'Ø': 'O',
+        'Ù': 'U', 'Ú': 'U', 'Û': 'U', 'Ü': 'U', 'Ý': 'Y', 'Þ': 'Th', 'ß': 'ss',
+        'à': 'a', 'á': 'a', 'â': 'a', 'ã': 'a', 'ä': 'a', 'å': 'a', 'æ': 'ae', 'ç': 'c',
+        'è': 'e', 'é': 'e', 'ê': 'e', 'ë': 'e', 'ì': 'i', 'í': 'i', 'î': 'i', 'ï': 'i',
+        'ð': 'd', 'ñ': 'n', 'ò': 'o', 'ó': 'o', 'ô': 'o', 'õ': 'o', 'ö': 'o', 'ø': 'o',
+        'ù': 'u', 'ú': 'u', 'û': 'u', 'ü': 'u', 'ý': 'y', 'þ': 'th', 'ÿ': 'y'
+    };
+
+    const slug = title.split('').map(char => map[char] || char)
+        .join('')
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .replace(/\s+/g, '-') // Reemplazar espacios por guiones
+        .replace(/[^\w\-]+/g, '') // Eliminar caracteres no deseados
+        .replace(/\-\-+/g, '-') // Reemplazar múltiples guiones por uno solo
+        .replace(/^-+/, '') // Eliminar guiones al inicio
+        .replace(/-+$/, ''); // Eliminar guiones al final
+
+    return slug;
+};
+
+
+watch(() => form.title, (newTitle) => {
+    if (isAutoSlug.value) {
+        form.slug = generateSlug(newTitle);
+    }
+});
+
+watch(isAutoSlug, (newValue) => {
+    if (newValue) {
+        form.slug = generateSlug(form.title);
+    }
+});
+
 </script>
 
 <template>
@@ -209,21 +254,40 @@ const quillOptions = {
                                 <div class="grid gap-4 md:gap-6 md:grid-cols-2">
                                     <!-- Column -->
                                     <div class="space-y-4 sm:space-y-6">
+
+
+                                        <!-- TITULO -->
+
                                         <div>
                                             <label for="name"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Titulo
-                                                del Destino
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                Título del Destino
                                                 <TooltipIcon
-                                                    message="Este es el título del destino. Asegúrate de que sea descriptivo y claro." />
+                                                    message="Este es el título del destino. Asegúrate de que sea descriptivo y claro. NO USAR '_' guiones bajos" />
                                             </label>
-
-
                                             <input
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                                                 v-model="form.title" placeholder="Título" />
                                             <span class="text-red-500">{{ form.errors.title }}</span>
-
                                         </div>
+
+                                        <!-- AUTO SLUG CHECKBOX -->
+                                        <div class="flex items-center mt-4">
+                                            <input type="checkbox" id="autoSlug" v-model="isAutoSlug" class="mr-2">
+                                            <label for="autoSlug"
+                                                class="text-sm font-medium text-gray-900 dark:text-white">
+                                                Autocompletar Slug
+                                            </label>
+                                        </div>
+
+
+
+
+
+
+
+
+
                                         <div>
                                             <label for="description"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
@@ -306,39 +370,45 @@ const quillOptions = {
 
 
                                     </div>
-                                    <!-- Column -->
+
                                     <div class="space-y-4 sm:space-y-6">
+
+
+
+
+
+                                        <!-- SLUG -->
                                         <div>
-                                            <label for="tags"
-                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Slug
+                                            <label for="slug"
+                                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                                                Slug
                                                 <TooltipIcon message="El slug sirve para tema de SEO" />
                                             </label>
                                             <input
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                v-model="form.slug" placeholder="Slug" />
+                                                v-model="form.slug" :disabled="isAutoSlug" placeholder="Slug" />
                                             <span class="text-red-500">{{ form.errors.slug }}</span>
-
                                         </div>
+
+
+
+
+
                                         <div>
                                             <label for="description"
                                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Dirección
                                                 <TooltipIcon message="Usar solo un link de Google maps" />
                                             </label>
-                                            <input
+                                            <input v-model="form.address" @input="validateAndPreviewMap"
                                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                                                v-model="form.address" placeholder="https://maps.app.goo.gl/example" />
+                                                placeholder="https://maps.app.goo.gl/example" />
+                                                <br>
                                             <span class="text-red-500">{{ form.errors.address }}</span>
+                                            <!-- <iframe
+                                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62070.704371726235!2d-72.02289104461671!3d-13.509857354142023!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x916dd66e7c08a8fd%3A0x9e3cb8b1e4c3803c!2sSaqsaywaman!5e0!3m2!1ses-419!2spe!4v1716205326541!5m2!1ses-419!2spe"
+                                                width="485" height="360" style="border:0;" allowfullscreen=""
+                                                loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe> -->
 
-                                            <div
-                                                class="w-full mb-4 bg-gray-100 border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600">
-
-
-                                                <div class="px-4 py-2 rounded-b-lg bg-gray-50 dark:bg-gray-700">
-                                                    <textarea id="description" rows="16"
-                                                        class="block w-full px-0 text-sm text-gray-800 border-0 bg-gray-50 dark:bg-gray-700 focus:ring-0 dark:text-white dark:placeholder-gray-400"
-                                                        placeholder="Escriba la descripción"></textarea>
-                                                </div>
-                                            </div>
                                         </div>
 
                                     </div>

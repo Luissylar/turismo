@@ -70,10 +70,17 @@ class AdminDestinationController extends Controller
      */
     public function show(Destination $destination)
     {
+        // Asumiendo que las imágenes están en public/storage/destinations/
+        $destination->image = url('storage/destinations/' . basename($destination->image));
+
         return Inertia::render('Admin/Destinations/Show', [
-            'destination' => $destination->only('id', 'title', 'description', 'address', 'slug') // Incluye 'slug' si es necesario para la vista
+            'destination' => $destination->only([
+                'id', 'title', 'description', 'content', 'image', 'address',
+                'latitude', 'longitude', 'status', 'weather', 'slug', 'accesibility'
+            ])
         ]);
     }
+
 
     /**
      * Show the form for editing the specified resource.
