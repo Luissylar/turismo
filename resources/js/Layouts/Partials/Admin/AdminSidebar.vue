@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
 import { Link } from '@inertiajs/vue3';
 
 // Define las propiedades que este componente recibirá
@@ -11,21 +11,21 @@ const props = defineProps({
 const isActive = ref(false);
 const isHovered = ref(false);
 
+
+
 </script>
 
 
 
 <template>
     <aside id="sidebar"
-        class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 w-64 h-full pt-16 duration-75 transition-width">
+        class="fixed top-0 left-0 z-20 flex flex-col flex-shrink-0 w-64 h-full pt-16 duration-75 transition-width sm:hidden md:flex">
 
-
-        <div
-            class="relative flex flex-col flex-1 min-h-0 pt-0 bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+        <div class="relative flex flex-col flex-1 min-h-0 pt-0 bg-white border-r border-gray-200 dark:border-gray-700">
             <div class="flex flex-col flex-1 pt-5 pb-4 overflow-y-auto">
-                <div
-                    class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
+                <div class="flex-1 px-3 space-y-1 bg-white divide-y divide-gray-200 dark:divide-gray-700">
                     <ul class="pb-2 space-y-2">
+
                         <!-- <li>
                             <form action="#" method="GET" class="lg:hidden">
                                 <label for="mobile-search" class="sr-only">Search</label>
@@ -67,7 +67,11 @@ const isHovered = ref(false);
                                 'opacity-75': !route().current('admin.dashboard')
                             }"
                                 class="inline-flex items-center justify-center w-5 h-5 p-1 ml-3 text-sm font-medium rounded-full text-primary-800 bg-primary-100">
-                                3
+                                <span class="relative flex w-2 h-2">
+                                    <span
+                                        class="absolute inline-flex w-full h-full bg-teal-400 rounded-full opacity-75 animate-ping"></span>
+                                    <span class="relative inline-flex bg-teal-500 rounded-full size-2"></span>
+                                </span>
                             </span>
                             </Link>
                         </li>
@@ -92,12 +96,14 @@ const isHovered = ref(false);
                                 'opacity-75': !route().current('admin.destinations.index')
                             }"
                                 class="inline-flex items-center justify-center w-5 h-5 p-1 ml-3 text-sm font-medium rounded-full text-primary-800 bg-primary-100">
-                                3
+                                <span class="relative flex w-2 h-2">
+                                    <span
+                                        class="absolute inline-flex w-full h-full bg-teal-400 rounded-full opacity-75 animate-ping"></span>
+                                    <span class="relative inline-flex bg-teal-500 rounded-full size-2"></span>
+                                </span>
                             </span>
                             </Link>
                         </li>
-
-
                         <li>
                             <Link :href="route('dashboard')"
                                 class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
@@ -133,139 +139,46 @@ const isHovered = ref(false);
                             </Link>
                         </li>
 
-
-
-
-
-
-
-
-
-
-                        <!-- <li>
-                            <button type="button"
-                                class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-                                aria-controls="dropdown-users" data-collapse-toggle="dropdown-users">
-                                <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path
-                                        d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z">
-                                    </path>
-                                </svg>
-                                <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Users</span>
-                                <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </button>
-                            <ul id="dropdown-users" class="hidden py-2 space-y-2 ">
-                                <li>
-                                    <a href="./users/list.html"
-                                        class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 ">Users
-                                        list</a>
-                                </li>
-                                <li>
-                                    <a href="./users/profile.html"
-                                        class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 ">Profile</a>
-                                </li>
-                                <li>
-                                    <a href="./users/feed.html"
-                                        class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Feed</a>
-                                </li>
-                                <li>
-                                    <a href="./users/settings.html"
-                                        class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700 ">Settings</a>
-                                </li>
-                            </ul>
-                        </li>
                         <li>
-                            <button type="button"
-                                class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-                                aria-controls="dropdown-pages" data-collapse-toggle="dropdown-pages">
-                                <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 10a1 1 0 10-2 0v3a1 1 0 102 0v-3zm2-3a1 1 0 011 1v5a1 1 0 11-2 0v-5a1 1 0 011-1zm4-1a1 1 0 10-2 0v7a1 1 0 102 0V8z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="flex-1 ml-3 text-left whitespace-nowrap" sidebar-toggle-item>Pages</span>
-                                <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </button>
-                            <ul id="dropdown-pages" class="hidden py-2 space-y-2">
-                                <li>
-                                    <a href="./pages/pricing.html"
-                                        class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Pricing</a>
-                                </li>
-                                <li>
-                                    <a href="./pages/maintenance.html"
-                                        class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Maintenance</a>
-                                </li>
-                                <li>
-                                    <a href="./pages/404.html"
-                                        class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">404
-                                        not found</a>
-                                </li>
-                                <li>
-                                    <a href="./pages/500.html"
-                                        class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">500
-                                        server error</a>
-                                </li>
-                            </ul>
+                            <Link :href="route('admin.facturacion.home')" :class="{
+                                'bg-gray-100 dark:bg-gray-700': route().current('admin.facturacion.home'),
+                                'hover:bg-gray-100 dark:hover:bg-gray-700': !route().current('admin.facturacion.home')
+                            }"
+                                class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-300 ease-in-out rounded-lg group dark:text-gray-200">
+                            <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                                viewBox="0 0 24 24">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M18 9V4a1 1 0 0 0-1-1H8.914a1 1 0 0 0-.707.293L4.293 7.207A1 1 0 0 0 4 7.914V20a1 1 0 0 0 1 1h4M9 3v4a1 1 0 0 1-1 1H4m11 6v4m-2-2h4m3 0a5 5 0 1 1-10 0 5 5 0 0 1 10 0Z" />
+                            </svg>
+
+                            <span class="flex-1 ml-3 whitespace-nowrap">Facturación rápida</span>
+                            <span :class="{
+                                'animate-ping duration-1000 bg-primary-500 text-white': route().current('admin.facturacion.home'),
+                                'opacity-75': !route().current('admin.facturacion.home')
+                            }"
+                                class="inline-flex items-center justify-center w-5 h-5 p-1 ml-3 text-sm font-medium rounded-full">
+                                <span class="relative flex w-2 h-2">
+                                    <span
+                                        class="absolute inline-flex w-full h-full bg-teal-400 rounded-full opacity-75 animate-ping"></span>
+                                    <span class="relative inline-flex bg-teal-500 rounded-full size-2"></span>
+                                </span>
+                            </span>
+                            </Link>
                         </li>
-                        <li>
-                            <button type="button"
-                                class="flex items-center w-full p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700"
-                                aria-controls="dropdown-auth" data-collapse-toggle="dropdown-auth">
-                                <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                                    fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                                <span class="flex-1 ml-3 text-left whitespace-nowrap"
-                                    sidebar-toggle-item>Authentication</span>
-                                <svg sidebar-toggle-item class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
-                                    xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd"
-                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                        clip-rule="evenodd"></path>
-                                </svg>
-                            </button>
-                            <ul id="dropdown-auth" class="hidden py-2 space-y-2">
-                                <li>
-                                    <a href="./authentication/sign-in.html"
-                                        class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Sign
-                                        in</a>
-                                </li>
-                                <li>
-                                    <a href="./authentication/sign-up.html"
-                                        class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Sign
-                                        up</a>
-                                </li>
-                                <li>
-                                    <a href="./authentication/forgot-password.html"
-                                        class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Forgot
-                                        password</a>
-                                </li>
-                                <li>
-                                    <a href="./authentication/reset-password.html"
-                                        class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Reset
-                                        password</a>
-                                </li>
-                                <li>
-                                    <a href="./authentication/profile-lock.html"
-                                        class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-700">Profile
-                                        lock</a>
-                                </li>
-                            </ul>
-                        </li> -->
+
+
+
+
+
+
+
+
+
+
+
+
                     </ul>
                     <div class="pt-2 space-y-2">
                         <!-- <a href="" target="_blank"
@@ -292,18 +205,26 @@ const isHovered = ref(false);
 
                         <Link :href="route('admin.help.index')"
                             class="flex items-center p-2 text-base font-normal text-gray-900 transition duration-75 rounded-lg hover:bg-gray-100 group dark:text-gray-200 dark:hover:bg-gray-700">
-                            <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
-                                fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-2 0c0 .993-.241 1.929-.668 2.754l-1.524-1.525a3.997 3.997 0 00.078-2.183l1.562-1.562C15.802 8.249 16 9.1 16 10zm-5.165 3.913l1.58 1.58A5.98 5.98 0 0110 16a5.976 5.976 0 01-2.516-.552l1.562-1.562a4.006 4.006 0 001.789.027zm-4.677-2.796a4.002 4.002 0 01-.041-2.08l-.08.08-1.53-1.533A5.98 5.98 0 004 10c0 .954.223 1.856.619 2.657l1.54-1.54zm1.088-6.45A5.974 5.974 0 0110 4c.954 0 1.856.223 2.657.619l-1.54 1.54a4.002 4.002 0 00-2.346.033L7.246 4.668zM12 10a2 2 0 11-4 0 2 2 0 014 0z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                            <span class="ml-3" sidebar-toggle-item>Ayuda</span>
+                        <svg class="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 dark:text-gray-400 dark:group-hover:text-white"
+                            fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-2 0c0 .993-.241 1.929-.668 2.754l-1.524-1.525a3.997 3.997 0 00.078-2.183l1.562-1.562C15.802 8.249 16 9.1 16 10zm-5.165 3.913l1.58 1.58A5.98 5.98 0 0110 16a5.976 5.976 0 01-2.516-.552l1.562-1.562a4.006 4.006 0 001.789.027zm-4.677-2.796a4.002 4.002 0 01-.041-2.08l-.08.08-1.53-1.533A5.98 5.98 0 004 10c0 .954.223 1.856.619 2.657l1.54-1.54zm1.088-6.45A5.974 5.974 0 0110 4c.954 0 1.856.223 2.657.619l-1.54 1.54a4.002 4.002 0 00-2.346.033L7.246 4.668zM12 10a2 2 0 11-4 0 2 2 0 014 0z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                        <span class="ml-3" sidebar-toggle-item>Ayuda</span>
                         </Link>
                     </div>
                 </div>
             </div>
             <div class="absolute bottom-0 left-0 justify-center hidden w-full p-4 space-x-4 lg:flex">
+                <Link :href="route('admin.sunat.dashboard')"
+                    class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+
+                <img class="w-[25px] h-[25px] text-gray-800 dark:text-white"
+                    src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAUVBMVEVHcEytDEGtDEGtDEGqD0StDEGtDEGtDEGtDEGyBTmtDEGtDEEAY64MYauuC0AAY60AY60AY60AY62tDEEAY61DTI0AY60AZK4AY60AY60AY61Yt/O+AAAAG3RSTlMAMe3hH/T/KPkQUohXEszxav/JpoMJ0jKxmtxwLnM/AAAAr0lEQVR4AXTRRRLEMBAEwRaamf3/h67ZrfBOXTNGCE5pYyGknPc6Eiz2W9qKtuWsbP9WToz3oqaeim2ImQ9UiZNbjjUvSlHzCgkrr1w37b5yZ1z80b7Z8CixVqWZObU7bWvA29A9k4c14wTqeYl5o4OXvq7z6VjC+OvvirXhqqUA9G6kxNNgBuDWMdTVJoCoE9ln5RphgU4IG2jlBRB1BiRl41rZgKGVbdPlNxEUPgAH2BHHDcY/qAAAAABJRU5ErkJggg=="
+                    style="height:26px;width:26px" alt="" data-csiid="8" data-atf="1">
+
+                </Link>
 
                 <Link :href="route('admin.profile.show')"
                     class="inline-flex justify-center p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
@@ -467,6 +388,11 @@ const isHovered = ref(false);
 
         </div>
     </aside>
+
+
+
+
+
     <!--
     Posiblemente incorporar para pantallas muy grandes y colocar algun menu que lo abra  -->
     <!-- <aside
