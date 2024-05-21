@@ -1,3 +1,37 @@
+<script setup>
+import { ref, computed } from 'vue';
+import { Link, usePage } from '@inertiajs/vue3';
+import AdminLayout from '@/Layouts/AdminLayout.vue';
+import Breadcrumb from '@/Layouts/Partials/Admin/Breadcrumb.vue';
+
+const breadcrumbs = [
+    { name: 'admin.dashboard', label: 'Dashboard' },
+    { name: 'admin.setting', label: 'Facturación rápida' }
+];
+
+// Definir las pestañas
+const tabs = ref([
+    { name: 'xdxd', href: 'admin.dashboard', current: false },
+    { name: 'Crear Factura', href: 'admin.facturacion.home', current: false },
+    { name: 'Crear Boleta', href: 'admin.facturacion.home', current: false },
+    { name: 'Crear Factura', href: 'admin.dashboard', current: false },
+
+]);
+
+// Obtener la ruta actual
+const page = usePage();
+const currentUrl = page.url;
+
+// Computar las pestañas actualizadas con el estado current
+const tabsComputed = computed(() => {
+    return tabs.value.map(tab => {
+        tab.current = route().current(tab.href);
+        return tab;
+    });
+});
+</script>
+
+
 <template>
     <AdminLayout title="Help">
         <div class="relative pb-5 border-b border-gray-200 sm:pb-0">
@@ -39,35 +73,3 @@
     </AdminLayout>
 </template>
 
-<script setup>
-import { ref, computed } from 'vue';
-import { Link, usePage } from '@inertiajs/vue3';
-import AdminLayout from '@/Layouts/AdminLayout.vue';
-import Breadcrumb from '@/Layouts/Partials/Admin/Breadcrumb.vue';
-
-const breadcrumbs = [
-    { name: 'admin.dashboard', label: 'Dashboard' },
-    { name: 'admin.setting', label: 'Facturación rápida' }
-];
-
-// Definir las pestañas
-const tabs = ref([
-    { name: 'xdxd', href: 'admin.dashboard', current: false },
-    { name: 'Crear Factura', href: 'admin.facturacion.home', current: false },
-    { name: 'Crear Boleta', href: 'admin.facturacion.home', current: false },
-    { name: 'Crear Factura', href: 'admin.dashboard', current: false },
-
-]);
-
-// Obtener la ruta actual
-const page = usePage();
-const currentUrl = page.url;
-
-// Computar las pestañas actualizadas con el estado current
-const tabsComputed = computed(() => {
-    return tabs.value.map(tab => {
-        tab.current = route().current(tab.href);
-        return tab;
-    });
-});
-</script>
