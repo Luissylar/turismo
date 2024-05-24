@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Guest\GuestDestinationController;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\Guest\GuestHomeController;
 use App\Http\Controllers\Guest\GuestShoppingCartController;
@@ -27,6 +28,12 @@ Route::get('/tours/{tour:slug}', [GuestTourController::class, 'show'])->name('to
 //RUTAS  CART
 
 Route::get('/cart', [GuestShoppingCartController::class, 'index'])->name('cart.index');
+
+
+//Rutas Destinos
+Route::get('/destinations', [GuestDestinationController::class, 'index'])->name('destinations.index');
+
+
 
 //eliminar xd PUTO EL QUE LO LEA
 
