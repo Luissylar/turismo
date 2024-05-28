@@ -99,8 +99,13 @@ const userNavigation = [
                     Tours
                 </NavLink>
                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
+                    dashboard
+                </NavLink>
+                <NavLink :href="route('destinations.index')" :active="route().current('destinations.*')">
                     Destinos
                 </NavLink>
+
+
                 <NavLink :href="route('cart.index')" :active="route().current('cart.index')">
                     <i class="fa-solid fa-cart-shopping"></i>
                      cart

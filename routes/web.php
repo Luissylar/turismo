@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Client\ClientBillingController;
+use App\Http\Controllers\Client\Payments\PaymentsController;
 use Inertia\Inertia;
 
 
@@ -24,5 +25,9 @@ Route::middleware(['web', 'auth'])->group(function () {
     Route::post('/billing/payment-method', [ClientBillingController::class, 'storePaymentMethod'])->name('billing.payment-method.store');
     Route::delete('/billing/payment-method/{paymentMethodId}', [ClientBillingController::class, 'deletePaymentMethod'])->name('billing.payment-method.delete');
 
-//
+    //PASARELAS DE PAGO LOCALES
+    Route::get('/payments', [PaymentsController::class,'home'])->name('client.payments.home');
+
+
+
 });

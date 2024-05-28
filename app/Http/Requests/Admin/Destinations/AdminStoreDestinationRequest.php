@@ -4,6 +4,9 @@ namespace App\Http\Requests\Admin\Destinations;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
+use App\Rules\Admin\Destination\NoImages;
+
 class AdminStoreDestinationRequest extends FormRequest
 {
     /**
@@ -22,10 +25,10 @@ class AdminStoreDestinationRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'string|max:255|unique:destinations,title',
-            'description' => 'required|string',
-            'content'=> 'required|string',
-            'image' => 'required|image',
+            'title' => 'required|string|min:8|max:255|unique:destinations,title',
+            'description' => 'required|string|min:20',
+            'content' => ['required', 'string', new NoImages],
+            'image' => 'required|image|mimes:jpg,png,jpeg,webp|max:2048',
             'address' => 'required|string|max:255',
             'latitude' => 'nullable|string|max:255',
             'longitude' => 'nullable|string|max:255',
@@ -33,11 +36,14 @@ class AdminStoreDestinationRequest extends FormRequest
             'slug' => [
                 'required',
                 'string',
+                'min:6',
                 'max:255',
                 'unique:destinations,slug',
-                'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/', // Expresión regular mejorada para validar el slug
+                'regex:/^[a-z0-9]+(?:-[a-z0-9]+)*$/',
             ],
             'accesibility' => 'required|string|max:255',
         ];
+
     }
+
 }
