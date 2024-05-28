@@ -53,6 +53,7 @@ class PaymentMethodAddedNotification extends Notification implements ShouldQueue
             ->line('Recuerda que nunca te pediremos tu contraseña por correo electrónico o teléfono.')
             ->line('Gracias por usar nuestra aplicación y confiar en nuestros servicios. Trabajamos constantemente para brindarte la mejor experiencia posible.')
             ->line('Si tienes alguna pregunta o necesitas asistencia adicional, no dudes en comunicarte con nosotros.')
+            ->line('---')
             ->salutation('Atentamente,')
             ->salutation('El equipo de Soporte de Nuestra Empresa');
 

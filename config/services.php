@@ -41,11 +41,50 @@ return [
     */
 
     'culqi' => [
-        'notifications' => [
-            'public_key' => env('CULQI_PUBLIC_KEY'),
-            'secret_key' => env('CULQI_SECRET_KEY'),
-            'rsa_id' => env('CULQI_RSA_ID'),
-            'rsa_public_key' => env('CULQI_RSA_PUBLIC_KEY'),
-        ],
+        'public_key' => env('CULQI_PUBLIC_KEY'),
+        'secret_key' => env('CULQI_SECRET_KEY'),
+        'rsa_id' => env('CULQI_RSA_ID'),
+        'rsa_public_key' => env('CULQI_RSA_PUBLIC_KEY'),
+
     ],
+    /*
+    |--------------------------------------------------------------------------|
+    | Integración con IZIPAY                                                   |
+    |--------------------------------------------------------------------------|
+    |                                                                          |
+    | Configuracion para IZIPAY, falta integrar                                |
+    |                                                                          |
+    */
+
+
+    'izipay' => [
+        'url' => env('IZIPAY_URL'),
+        'client_id' => env('IZIPAY_CLIENT_ID'),
+        'client_secret' => env('IZIPAY_CLIENT_SECRET'),
+        'public_key' => env('IZIPAY_PUBLIC_KEY'),
+        'hash_key' => env('IZIPAY_HASH_KEY'),
+    ],
+
+
+    /*
+    |--------------------------------------------------------------------------|
+    | Integración con NIUBIZ                                                   |
+    |--------------------------------------------------------------------------|
+    |                                                                          |
+    | Configuracion para NIUBIZ, falta integrar                                |
+    |                                                                          |
+    */
+    'niubiz' => [
+        'url' => env('IZIPAY_URL'),
+        'client_id' => env('IZIPAY_CLIENT_ID'),
+        'client_secret' => env('IZIPAY_CLIENT_SECRET'),
+        'public_key' => env('IZIPAY_PUBLIC_KEY'),
+        'hash_key' => env('IZIPAY_HASH_KEY'),
+    ],
+
+
+
+
+
+
 ];
