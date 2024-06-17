@@ -1,6 +1,5 @@
 <script setup>
 import { ref } from 'vue';
-import { defineProps } from 'vue';
 import { computed } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import { BellIcon } from '@heroicons/vue/24/outline';
@@ -9,12 +8,15 @@ import 'github-markdown-css';
 import MarkdownIt from 'markdown-it';
 import DOMPurify from 'dompurify';
 // Define las props para recibir los datos del tour
+import { defineProps } from 'vue';
+
 const props = defineProps({
     tour: Object
 });
+const tour = ref(props.tour);
+
 
 const md = new MarkdownIt();
-const tour = ref(props.tour);
 
 
 
